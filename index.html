@@ -8,7 +8,7 @@
   <script src="https://cdn.worldcoin.org/idkit.js"></script>
 </head>
 <body class="bg-black min-h-screen font-sans text-white">
-  <div class="max-w-2xl mx-auto p-6">
+  <div class="max-w-3xl mx-auto p-6">
     <div class="text-center mb-8">
       <h1 class="text-4xl font-bold text-green-400">🌴 Bienvenido a Cococity 🌴</h1>
       <p class="text-lg text-gray-300 mt-2">Una ciudad llena de locuras creativas, verificada por humanos reales.</p>
@@ -19,7 +19,7 @@
     </div>
 
     <div class="grid grid-cols-2 gap-4">
-      <a href="#" class="bg-zinc-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-pink-600">
+      <a href="#museo" class="bg-zinc-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-pink-600">
         <h2 class="text-xl font-bold text-pink-400">🎨 Museo del Futuro</h2>
         <p class="text-gray-400 text-sm">Sube tus creaciones con IA.</p>
       </a>
@@ -47,6 +47,27 @@
         <a href="https://t.me/cocolococoin" target="_blank" class="hover:underline">Telegram</a>
         <a href="https://www.youtube.com/@CocoLococoin" target="_blank" class="hover:underline">YouTube</a>
         <a href="https://twitter.com/Btc_worldchain" target="_blank" class="hover:underline">Twitter</a>
+      </div>
+    </div>
+
+    <div id="museo" class="mt-16">
+      <h2 class="text-3xl font-bold text-pink-500 mb-4">🎨 Museo del Futuro</h2>
+
+      <form class="bg-zinc-800 p-4 rounded-xl space-y-4 mb-8">
+        <input type="text" placeholder="Título de tu obra" class="w-full p-2 rounded bg-zinc-700 text-white" />
+        <input type="file" accept="image/*" class="w-full p-2 rounded bg-zinc-700 text-white" />
+        <button type="submit" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded w-full">Subir creación</button>
+      </form>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-zinc-900 rounded-xl overflow-hidden">
+          <img src="https://via.placeholder.com/300" alt="obra" class="w-full h-48 object-cover" />
+          <div class="p-2 text-sm text-gray-300">Título de ejemplo</div>
+        </div>
+        <div class="bg-zinc-900 rounded-xl overflow-hidden">
+          <img src="https://via.placeholder.com/300" alt="obra" class="w-full h-48 object-cover" />
+          <div class="p-2 text-sm text-gray-300">Otra creación</div>
+        </div>
       </div>
     </div>
   </div>
