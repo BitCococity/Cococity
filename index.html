@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cococity 🌴</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.worldcoin.org/idkit.js"></script>
+</head>
+<body class="bg-black min-h-screen font-sans text-white">
+  <div class="max-w-2xl mx-auto p-6">
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-green-400">🌴 Bienvenido a Cococity 🌴</h1>
+      <p class="text-lg text-gray-300 mt-2">Una ciudad llena de locuras creativas, verificada por humanos reales.</p>
+    </div>
+
+    <div class="flex justify-center mb-6">
+      <div id="world-id-verification"></div>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4">
+      <a href="#" class="bg-zinc-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-pink-600">
+        <h2 class="text-xl font-bold text-pink-400">🎨 Museo del Futuro</h2>
+        <p class="text-gray-400 text-sm">Sube tus creaciones con IA.</p>
+      </a>
+      <a href="#" class="bg-zinc-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-indigo-600">
+        <h2 class="text-xl font-bold text-indigo-400">🧠 Trivias Locas</h2>
+        <p class="text-gray-400 text-sm">Responde y desbloquea secretos.</p>
+      </a>
+      <a href="#" class="bg-zinc-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-orange-600">
+        <h2 class="text-xl font-bold text-orange-400">🎮 Minijuego Tonto</h2>
+        <p class="text-gray-400 text-sm">¡Aplasta cocos y gana puntos!</p>
+      </a>
+      <a href="#" class="bg-zinc-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-blue-600">
+        <h2 class="text-xl font-bold text-blue-400">📻 Radio Cococity</h2>
+        <p class="text-gray-400 text-sm">Canciones IA que suenan fresquitas.</p>
+      </a>
+      <a href="#" class="bg-zinc-800 shadow-md rounded-2xl p-4 hover:scale-105 transition opacity-50 cursor-not-allowed border border-gray-700">
+        <h2 class="text-xl font-bold text-gray-500">🚪 Club Secreto</h2>
+        <p class="text-gray-500 text-sm">Próximamente para holders.</p>
+      </a>
+    </div>
+
+    <div class="mt-10 text-center">
+      <p class="text-sm text-gray-500">ID de la app: <strong>bitcoinerssecondchance</strong></p>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      window.IDKit.init({
+        app_id: "bitcoinerssecondchance",
+        action: "login",
+        signal: "cococity-access",
+        onSuccess: (proof) => {
+          alert("Verificación completada. ¡Bienvenido a Cococity!");
+        },
+        onError: (error) => {
+          console.error(error);
+          alert("Error de verificación");
+        },
+      });
+    });
+  </script>
+</body>
+</html>
