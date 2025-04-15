@@ -5,11 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cococity 🌴</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .neon {
+      color: #ff00ff;
+      text-shadow:
+        0 0 5px #ff00ff,
+        0 0 10px #ff00ff,
+        0 0 20px #ff00ff,
+        0 0 40px #ff00ff;
+      animation: blink 1.5s infinite alternate;
+    }
+    @keyframes blink {
+      from { opacity: 1; }
+      to { opacity: 0.6; }
+    }
+    .coco-score {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #00ff00;
+    }
+    .neon-heading {
+      color: #ff00ff;
+      text-shadow:
+        0 0 5px #ff00ff,
+        0 0 10px #ff00ff;
+    }
+  </style>
 </head>
 <body class="bg-black min-h-screen font-sans text-white">
   <div class="max-w-2xl mx-auto p-6">
     <div class="text-center mb-8">
-      <h1 class="text-4xl font-bold neon text-center">🌴 Welcome to Fabulous Cococity 🌴</h1>
+      <h1 class="text-4xl font-bold neon-heading text-center">🌴 Welcome to Fabulous Cococity 🌴</h1>
       <p class="text-lg text-gray-300 mt-2">¡Bienvenido a Cococity! Un paraíso digital lleno de música, juegos y mucho más.</p>
     </div>
 
@@ -25,7 +51,83 @@
       </a>
     </div>
 
-    <!-- Aquí pondremos otras secciones, como Radio, CococityTV, etc. -->
+    <!-- Radio Cococity -->
+    <div class="bg-zinc-900 shadow-md rounded-2xl p-4 mb-8 hover:scale-105 transition border border-green-600">
+      <h2 class="text-xl font-bold text-green-400 mb-2">📻 Radio Cococity</h2>
+      <select id="spotify-artists" class="w-full p-2 rounded bg-zinc-800 text-white" onchange="if(this.value) window.open(this.value, '_blank')">
+        <option value="">Elige un artista</option>
+        <option value="https://open.spotify.com/artist/48XM3ZGPuiGIiKrJXE0fW4">Mia Ivanova</option>
+        <option value="https://open.spotify.com/artist/342ooXlx6MoHh8ZaNMEh8G">Keko</option>
+        <option value="https://open.spotify.com/artist/0jZT19Mu0cVe7t2FsyWsoV">KDK7</option>
+        <option value="https://open.spotify.com/artist/51K7j7kbc5meJMVaUBNvK6">Tianyu</option>
+        <option value="https://open.spotify.com/artist/784mtdLlFMLdyqVxPYyT5B">Radio 77</option>
+      </select>
+    </div>
+
+    <!-- Otras secciones -->
+    <div class="grid grid-cols-2 gap-4 mb-8">
+      <button onclick="toggleMuseo()" class="bg-zinc-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-pink-600">
+        <h2 class="text-xl font-bold text-pink-400">🎨 Museo del Futuro</h2>
+        <p class="text-gray-400 text-sm">Sube tus creaciones con IA.</p>
+      </button>
+      <a href="#" class="bg-zinc-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-indigo-600">
+        <h2 class="text-xl font-bold text-indigo-400">🧠 Trivias Locas</h2>
+        <p class="text-gray-400 text-sm">Responde y desbloquea secretos.</p>
+      </a>
+      <a href="#" class="bg-zinc-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-orange-600">
+        <h2 class="text-xl font-bold text-orange-400">🎮 Minijuego Tonto</h2>
+        <p class="text-gray-400 text-sm">¡Aplasta cocos y gana puntos!</p>
+      </a>
+    </div>
+
+    <!-- Sello de identidad Bitcococoin -->
+    <div class="mt-8 text-center">
+      <a href="https://worldcoin.org/mini-app?app_id=app_15daccf5b7d4ec9b7dbba044a8fdeab5&app_mode=mini-app" target="_blank">
+        <img src="/bitcococoin-logo.png" alt="Bitcococoin" class="mx-auto w-28 hover:scale-105 transition duration-300" />
+        <p class="text-sm text-gray-500 mt-1">Powered by Bitcococoin</p>
+      </a>
+    </div>
+
+    <!-- Pestaña de información de Cococity -->
+    <div class="fixed bottom-0 w-full bg-black text-center py-3">
+      <button onclick="toggleCococityInfo()" class="w-full bg-pink-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-pink-700">
+        ¿Qué es Cococity? 🌴
+      </button>
+
+      <!-- Información desplegable -->
+      <div id="cococity-info" class="hidden bg-zinc-900 text-white p-4 mt-2 rounded-lg">
+        <button onclick="toggleCococityInfo()" class="text-red-400 font-semibold mb-4">❌ Cerrar</button>
+        <h2 class="text-2xl font-bold text-pink-400 mb-4">🌴 ¿Qué es Cococity? ¡Tu paraíso digital! 🌴</h2>
+        <p class="text-lg text-gray-300 mt-2">
+          En **Cococity**, cada día es una fiesta 🎉. Aquí, la creatividad y la diversión se mezclan para crear una comunidad única. ¿Te gusta la música 🎶? ¿Te apasionan los videojuegos 🎮? ¿Y si te dijéramos que todo lo que disfrutas puede generar **beneficios** para ti y la comunidad? ¡Así es, Cococity es más que un lugar, es un ecosistema digital en el que cada click cuenta! 💸
+        </p>
+        <p class="text-lg text-gray-300 mt-4">
+          **Bitcococoin 🌴** es nuestro token exclusivo. Cada vez que interactúas, juegas, o escuchas música, ¡estás participando en un proyecto que se reinvierte a ti y a la comunidad! Los **beneficios** de la música que escuchas, los **cocos** que ganas en los minijuegos, ¡todo se reinvierte en **Cococity** para que crezca cada vez más! 🚀
+        </p>
+        <p class="text-lg text-gray-300 mt-4">
+          🎧 **Escucha música y gana**. Cada vez que reproduces canciones en Cococity, parte de los ingresos se reinvierten en nuevos contenidos y actividades para la comunidad. Así que, no solo disfrutas de lo que más te gusta, ¡sino que también formas parte del crecimiento del proyecto! 🌱
+        </p>
+        <p class="text-lg text-gray-300 mt-4">
+          🎮 **Juega, compite y sube de nivel**. Los **minijuegos** no solo son para divertirse, también ayudan a que **Bitcococoin** se distribuya entre los miembros activos de Cococity, creando una **economía digital** que crece gracias a ti. ¡Gana más cocos y sube en el ranking! 🏆
+        </p>
+        <p class="text-lg text-gray-300 mt-4">
+          🌐 ¡**Únete a Cococity** y empieza a ganar ahora! Tu **Bitcococoin** no es solo un token, ¡es tu llave para desbloquear un futuro lleno de música, juegos y grandes recompensas! 💰
+        </p>
+      </div>
+    </div>
   </div>
+
+  <script>
+    function toggleMuseo() {
+      const museo = document.getElementById("museo");
+      museo.classList.toggle("hidden");
+    }
+
+    // Función para mostrar/ocultar la información de Cococity
+    function toggleCococityInfo() {
+      const info = document.getElementById("cococity-info");
+      info.classList.toggle("hidden");
+    }
+  </script>
 </body>
 </html>
