@@ -6,26 +6,17 @@ canvas.height = window.innerHeight;
 
 let score = 0;
 
-const bg = new Image();
-bg.src = 'assets/bg.jpg';
-
-const hoopImg = new Image();
-hoopImg.src = 'assets/hoop.png';
-
-const ballImg = new Image();
-ballImg.src = 'assets/ball.png';
-
 const hoop = {
-  x: canvas.width - 200,
+  x: canvas.width - 180,
   y: canvas.height / 3,
-  width: 120,
-  height: 100,
+  width: 100,
+  height: 10,
 };
 
 const ball = {
   x: 100,
   y: canvas.height - 100,
-  radius: 30,
+  radius: 20,
   dx: 0,
   dy: 0,
   inAir: false,
@@ -40,16 +31,47 @@ function resetBall() {
 }
 
 function drawHoop() {
-  ctx.drawImage(hoopImg, hoop.x, hoop.y, hoop.width, hoop.height);
+  // Tablero
+  ctx.fillStyle = "#ccc";
+  ctx.fillRect(hoop.x - 10, hoop.y - 40, 80, 40);
+  // Aro
+  ctx.fillStyle = "#e53935";
+  ctx.fillRect(hoop.x, hoop.y, hoop.width, hoop.height);
+  // Red (líneas)
+  ctx.strokeStyle = "white";
+  ctx.beginPath();
+  ctx.moveTo(hoop.x, hoop.y + hoop.height);
+  ctx.lineTo(hoop.x + hoop.width, hoop.y + hoop.height + 15);
+  ctx.stroke();
 }
 
 function drawBall() {
-  ctx.drawImage(ballImg, ball.x - ball.radius, ball.y - ball.radius, ball.radius * 2, ball.radius * 2);
+  ctx.beginPath();
+  ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+  ctx.fillStyle = "#ff9800";
+  ctx.fill();
+  ctx.strokeStyle = "#fff";
+  ctx.stroke();
+  ctx.closePath();
+}
+
+function drawPalmTree() {
+  // Tronco
+  ctx.fillStyle = "#6d4c41";
+  ctx.fillRect(50, canvas.height - 150, 20, 150);
+
+  // Hojas
+  ctx.fillStyle = "#2e7d32";
+  for (let i = 0; i < 5; i++) {
+    ctx.beginPath();
+    ctx.ellipse(60, canvas.height - 150, 60, 15, Math.PI / 4 * i, 0, Math.PI * 2);
+    ctx.fill();
+  }
 }
 
 function update() {
   if (ball.inAir) {
-    ball.dy += 0.5; // gravedad
+    ball.dy += 0.5;
     ball.x += ball.dx;
     ball.y += ball.dy;
 
@@ -58,12 +80,12 @@ function update() {
       resetBall();
     }
 
-    // Puntuación
+    // Enceste
     if (
-      ball.x > hoop.x + 20 &&
-      ball.x < hoop.x + hoop.width - 20 &&
-      ball.y > hoop.y + 30 &&
-      ball.y < hoop.y + 60
+      ball.x > hoop.x &&
+      ball.x < hoop.x + hoop.width &&
+      ball.y > hoop.y &&
+      ball.y < hoop.y + hoop.height + 10
     ) {
       score++;
       document.getElementById("score").textContent = score;
@@ -74,6 +96,7 @@ function update() {
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawPalmTree();
   drawHoop();
   drawBall();
 }
@@ -84,4 +107,14 @@ function gameLoop() {
   requestAnimationFrame(gameLoop);
 }
 
-canvas.addEventListener("click
+canvas.addEventListener("click", () => {
+  if (!ball.inAir) {
+    const angle = Math.random() * 0.4 + 0.2;
+    const power = Math.random() * 6 + 12;
+    ball.dx = Math.cos(angle) * power;
+    ball.dy = -Math.sin(angle) * power;
+    ball.inAir = true;
+  }
+});
+
+gameLoop();
