@@ -6,12 +6,13 @@ body {
 }
 
 #gameCanvas {
-  background-color: #1e293b;
+  background: linear-gradient(to top, #0f172a, #1e293b);
   border: 3px solid #FFA500;
   border-radius: 10px;
   width: 90%;
   max-width: 600px;
   height: 400px;
+  display: block;
 }
 
 .score {
