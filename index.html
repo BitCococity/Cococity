@@ -14,11 +14,11 @@
         0 0 20px #ff00ff,
         0 0 40px #ff00ff;
       animation: blink 1.5s infinite alternate;
-    }@keyframes blink {
-  from { opacity: 1; }
-  to { opacity: 0.6; }
-}
-
+    }
+    @keyframes blink {
+      from { opacity: 1; }
+      to { opacity: 0.6; }
+    }
   </style>
 </head>
 <body class="bg-black min-h-screen font-sans text-white">
@@ -38,25 +38,6 @@
   </p>
 </div>
 
-<div class="mb-6">
-  <label for="spotify-artists" class="block text-pink-400 font-semibold mb-2">🎵 Radio Cococity</label>
-  <select id="spotify-artists" class="w-full p-2 rounded bg-zinc-800 text-white" onchange="if(this.value) window.open(this.value, '_blank')">
-    <option value="">Selecciona un artista</option>
-    <option value="https://open.spotify.com/artist/48XM3ZGPuiGIiKrJXE0fW4">DJ Cocobass</option>
-    <option value="https://open.spotify.com/artist/342ooXlx6MoHh8ZaNMEh8G">Piñarito</option>
-    <option value="https://open.spotify.com/artist/0jZT19Mu0cVe7t2FsyWsoV">Cocoloco</option>
-    <option value="https://open.spotify.com/artist/51K7j7kbc5meJMVaUBNvK6">Bitbeat</option>
-    <option value="https://open.spotify.com/artist/784mtdLlFMLdyqVxPYyT5B">Tropicalbot</option>
-  </select>
-</div>
-
-<div class="text-center mb-10">
-  <a href="https://t.me/cocolococoin" target="_blank" class="inline-flex items-center bg-blue-600 text-white font-bold text-lg py-3 px-6 rounded-lg hover:bg-blue-700 transition">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" class="w-6 h-6 mr-2">
-    Únete a nuestro canal de Telegram
-  </a>
-</div>
-
 <div class="flex justify-center mb-6">
   <div id="world-id-verification"></div>
 </div>
@@ -74,6 +55,17 @@
     <h2 class="text-xl font-bold text-orange-400">🎮 Minijuego Tonto</h2>
     <p class="text-gray-400 text-sm">¡Aplasta cocos y gana puntos!</p>
   </a>
+  <div class="bg-zinc-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-green-600">
+    <h2 class="text-xl font-bold text-green-400 mb-2">📻 Radio Cococity</h2>
+    <select id="spotify-artists" class="w-full p-2 rounded bg-zinc-800 text-white" onchange="if(this.value) window.open(this.value, '_blank')">
+      <option value="">Elige un artista</option>
+      <option value="https://open.spotify.com/artist/48XM3ZGPuiGIiKrJXE0fW4">DJ Cocobass</option>
+      <option value="https://open.spotify.com/artist/342ooXlx6MoHh8ZaNMEh8G">Piñarito</option>
+      <option value="https://open.spotify.com/artist/0jZT19Mu0cVe7t2FsyWsoV">Cocoloco</option>
+      <option value="https://open.spotify.com/artist/51K7j7kbc5meJMVaUBNvK6">Bitbeat</option>
+      <option value="https://open.spotify.com/artist/784mtdLlFMLdyqVxPYyT5B">Tropicalbot</option>
+    </select>
+  </div>
   <a href="https://www.youtube.com/@CocoLococoin" target="_blank" class="bg-red-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-red-500">
     <h2 class="text-xl font-bold text-red-300">📺 CococityTV</h2>
     <p class="text-gray-200 text-sm">Mira los videos más locos en YouTube.</p>
@@ -95,11 +87,21 @@
 </div>
 
 <div class="mt-10 text-center space-y-4">
-  <p class="text-sm text-gray-500">ID de la app: <strong>bitcoinerssecondchance</strong></p>
-  <div class="flex justify-center gap-4 text-sm">
-    <a href="https://t.me/cocolococoin" target="_blank" class="flex items-center gap-1 text-blue-400 hover:text-blue-500">Telegram</a>
-    <a href="https://www.youtube.com/@CocoLococoin" target="_blank" class="flex items-center gap-1 text-red-400 hover:text-red-500">YouTube</a>
-    <a href="https://twitter.com/Btc_worldchain" target="_blank" class="flex items-center gap-1 text-white hover:text-gray-300">Twitter</a>
+  <p class="text-lg text-blue-400 font-bold">
+    <a href="https://t.me/cocolococoin" target="_blank" class="inline-flex items-center gap-2">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" class="w-6 h-6" alt="Telegram">
+      Únete a nuestro canal de Telegram
+    </a>
+  </p>
+  <div class="flex justify-center gap-6 text-sm">
+    <a href="https://www.youtube.com/@CocoLococoin" target="_blank" class="flex items-center gap-2 text-red-400 hover:text-red-500">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" class="w-6 h-6" alt="YouTube">
+      YouTube
+    </a>
+    <a href="https://twitter.com/Btc_worldchain" target="_blank" class="flex items-center gap-2 text-white hover:text-gray-300">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" class="w-6 h-6" alt="Twitter">
+      Twitter
+    </a>
   </div>
 </div>
 
