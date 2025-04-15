@@ -4,26 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>🏀 Baloncesto Cococity</title>
-  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="bg-black text-white">
-  <div class="text-center p-4">
-    <h1 class="text-3xl font-bold text-orange-400 mb-2">🏀 ¡Encesta en Cococity!</h1>
-    <p class="text-gray-400 mb-4">Haz clic o toca la pantalla para lanzar el balón y sumar puntos.</p>
-    <div class="score">Puntos: <span id="score">0</span></div>
+<body>
+  <div class="scoreboard">
+    <span>PUNTOS</span>
+    <div id="score">0</div>
   </div>
-
-  <div class="flex justify-center">
-    <canvas id="gameCanvas"></canvas>
-  </div>
-
-  <div class="text-center mt-6">
-    <a href="index.html" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-4 rounded-xl transition">⬅ Volver a Cococity</a>
-  </div>
-
-  <audio id="throwSound" src="sounds/throw.mp3" preload="auto"></audio>
-  <audio id="scoreSound" src="sounds/score.mp3" preload="auto"></audio>
+  <canvas id="gameCanvas"></canvas>
+  <a href="index.html" class="back-button">⬅ Volver</a>
 
   <script src="script.js"></script>
 </body>
