@@ -3,15 +3,13 @@ body {
   padding: 0;
   overflow: hidden;
   font-family: 'Arial', sans-serif;
-  background: url('assets/bg.jpg') no-repeat center center fixed;
-  background-size: cover;
+  background: linear-gradient(to top, #009688, #80cbc4);
 }
 
 canvas {
   display: block;
   margin: auto;
-  border: none;
-  background-color: transparent;
+  background: transparent;
 }
 
 .scoreboard {
