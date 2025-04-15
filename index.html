@@ -19,27 +19,35 @@
       from { opacity: 1; }
       to { opacity: 0.6; }
     }
-    .coco-score {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #00ff00;
-    }
     .neon-heading {
       color: #ff00ff;
       text-shadow:
         0 0 5px #ff00ff,
         0 0 10px #ff00ff;
+      animation: blink 1.5s infinite alternate;
+    }
+    .center-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+    .content {
+      max-width: 90%;
+      margin: 0 auto;
     }
   </style>
 </head>
 <body class="bg-black min-h-screen font-sans text-white">
   <div class="max-w-2xl mx-auto p-6">
     <div class="text-center mb-8">
-      <h1 class="text-4xl font-bold neon-heading text-center">🌴 Welcome to Fabulous Cococity 🌴</h1>
+      <!-- Titulo con luces neon parpadeando -->
+      <h1 class="text-4xl font-bold neon-heading">🌴 Welcome to Fabulous Cococity 🌴</h1>
       <p class="text-lg text-gray-300 mt-2">¡Bienvenido a Cococity! Un paraíso digital lleno de música, juegos y mucho más.</p>
     </div>
 
-    <!-- Enlaces a las páginas del juego y trivia -->
+    <!-- Sección de Enlaces -->
     <div class="grid grid-cols-2 gap-4 mb-8">
       <a href="game.html" class="bg-zinc-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-orange-600">
         <h2 class="text-xl font-bold text-orange-400">🏀 Juego de Baloncesto</h2>
