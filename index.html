@@ -26,17 +26,6 @@
         0 0 10px #ff00ff;
       animation: blink 1.5s infinite alternate;
     }
-    .center-content {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
-    }
-    .content {
-      max-width: 90%;
-      margin: 0 auto;
-    }
   </style>
 </head>
 <body class="bg-black min-h-screen font-sans text-white">
@@ -95,49 +84,12 @@
         <p class="text-sm text-gray-500 mt-1">Powered by Bitcococoin</p>
       </a>
     </div>
-
-    <!-- Pestaña de información de Cococity -->
-    <div class="fixed bottom-0 w-full bg-black text-center py-3">
-      <button onclick="toggleCococityInfo()" class="w-full bg-pink-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-pink-700">
-        ¿Qué es Cococity? 🌴
-      </button>
-
-      <!-- Información desplegable -->
-      <div id="cococity-info" class="hidden bg-zinc-900 text-white p-4 mt-2 rounded-lg">
-        <!-- Botón de cierre -->
-        <button onclick="toggleCococityInfo()" class="text-red-400 font-semibold mb-4">
-          ❌ Cerrar
-        </button>
-        <h2 class="text-2xl font-bold text-pink-400 mb-4">🌴 ¿Qué es Cococity? ¡Tu paraíso digital! 🌴</h2>
-        <p class="text-lg text-gray-300 mt-2">
-          En **Cococity**, cada día es una fiesta 🎉. Aquí, la creatividad y la diversión se mezclan para crear una comunidad única. ¿Te gusta la música 🎶? ¿Te apasionan los videojuegos 🎮? ¿Y si te dijéramos que todo lo que disfrutas puede generar **beneficios** para ti y la comunidad? ¡Así es, Cococity es más que un lugar, es un ecosistema digital en el que cada click cuenta! 💸
-        </p>
-        <p class="text-lg text-gray-300 mt-4">
-          **Bitcococoin 🌴** es nuestro token exclusivo. Cada vez que interactúas, juegas, o escuchas música, ¡estás participando en un proyecto que se reinvierte a ti y a la comunidad! Los **beneficios** de la música que escuchas, los **cocos** que ganas en los minijuegos, ¡todo se reinvierte en **Cococity** para que crezca cada vez más! 🚀
-        </p>
-        <p class="text-lg text-gray-300 mt-4">
-          🎧 **Escucha música y gana**. Cada vez que reproduces canciones en Cococity, parte de los ingresos se reinvierten en nuevos contenidos y actividades para la comunidad. Así que, no solo disfrutas de lo que más te gusta, ¡sino que también formas parte del crecimiento del proyecto! 🌱
-        </p>
-        <p class="text-lg text-gray-300 mt-4">
-          🎮 **Juega, compite y sube de nivel**. Los **minijuegos** no solo son para divertirse, también ayudan a que **Bitcococoin** se distribuya entre los miembros activos de Cococity, creando una **economía digital** que crece gracias a ti. ¡Gana más cocos y sube en el ranking! 🏆
-        </p>
-        <p class="text-lg text-gray-300 mt-4">
-          🌐 ¡**Únete a Cococity** y empieza a ganar ahora! Tu **Bitcococoin** no es solo un token, ¡es tu llave para desbloquear un futuro lleno de música, juegos y grandes recompensas! 💰
-        </p>
-      </div>
-    </div>
   </div>
 
   <script>
     function toggleMuseo() {
       const museo = document.getElementById("museo");
       museo.classList.toggle("hidden");
-    }
-
-    // Función para mostrar/ocultar la información de Cococity
-    function toggleCococityInfo() {
-      const info = document.getElementById("cococity-info");
-      info.classList.toggle("hidden");
     }
   </script>
 </body>
