@@ -3,7 +3,8 @@ body {
   padding: 0;
   overflow: hidden;
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(to top, #009688, #80cbc4);
+  background: url('cococity_bg.jpg') no-repeat center center fixed;
+  background-size: cover;
 }
 
 canvas {
