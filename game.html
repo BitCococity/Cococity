@@ -6,61 +6,86 @@
   <title>Juego de Baloncesto - Cococity</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    body {
+      background-color: #121212;
+      font-family: Arial, sans-serif;
+    }
+
     .basketball-court {
-      background-color: #f1c40f;
+      background-color: #2c3e50;
       width: 100%;
       height: 400px;
       position: relative;
-      border: 3px solid #e67e22;
+      border: 5px solid #e67e22;
       border-radius: 10px;
+      overflow: hidden;
     }
 
     .basketball {
-      width: 60px;
-      height: 60px;
+      width: 80px;
+      height: 80px;
       background-color: orange;
       border-radius: 50%;
       position: absolute;
-      top: 20px;
+      top: 50px;
       left: 50%;
       transform: translateX(-50%);
       cursor: pointer;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      transition: all 0.3s ease-in-out;
     }
 
     .hoop {
-      width: 100px;
+      width: 120px;
       height: 10px;
       background-color: #c0392b;
       position: absolute;
-      top: 350px;
+      bottom: 10px;
       left: 50%;
       transform: translateX(-50%);
       border-radius: 50%;
+      z-index: 1;
     }
 
     .scoreboard {
-      font-size: 24px;
-      color: #ffffff;
+      font-size: 32px;
+      color: white;
       text-align: center;
       margin-top: 20px;
     }
 
     .button-back {
       background-color: #ff00ff;
-      padding: 10px 20px;
+      padding: 12px 24px;
       border-radius: 8px;
       color: white;
       text-decoration: none;
-      font-size: 16px;
+      font-size: 18px;
       text-align: center;
       margin-top: 20px;
     }
+
     .button-back:hover {
       background-color: #e600e6;
     }
+
+    .reset-button {
+      background-color: #27ae60;
+      padding: 12px 24px;
+      border-radius: 8px;
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .reset-button:hover {
+      background-color: #2ecc71;
+    }
   </style>
 </head>
-<body class="bg-black text-white min-h-screen">
+<body>
   <div class="max-w-2xl mx-auto p-6">
     <div class="text-center mb-8">
       <h1 class="text-4xl font-bold text-pink-400">🏀 ¡Encesta el Balón!</h1>
@@ -68,37 +93,84 @@
     </div>
 
     <!-- Área de Juego -->
-    <div class="basketball-court">
+    <div class="basketball-court" id="court">
       <div id="basketball" class="basketball"></div>
       <div class="hoop"></div>
     </div>
 
     <!-- Marcador -->
-    <div class="scoreboard" id="score">
-      Puntos: 0
-    </div>
+    <div class="scoreboard" id="score">Puntos: 0</div>
 
-    <!-- Botón de vuelta al inicio -->
+    <!-- Botones -->
     <a href="index.html" class="button-back">Regresar al Inicio</a>
+    <button id="reset-btn" class="reset-button" style="display:none">Reiniciar Juego</button>
   </div>
 
   <script>
     let score = 0;
-    const basketball = document.getElementById("basketball");
-    const scoreboard = document.getElementById("score");
+    let basketball = document.getElementById("basketball");
+    let scoreboard = document.getElementById("score");
+    let court = document.getElementById("court");
+    let resetButton = document.getElementById("reset-btn");
+    let hoop = document.querySelector(".hoop");
 
-    // Movimientos del balón
-    basketball.addEventListener("click", () => {
-      // Movimiento aleatorio para el balón
-      let newTop = Math.random() * 250 + 50; // Aleatorio entre 50px y 250px
-      basketball.style.top = newTop + "px";
+    // Sonidos
+    const scoreSound = new Audio('https://www.soundjay.com/button/beep-07.wav');
+    const missSound = new Audio('https://www.soundjay.com/button/beep-09.wav');
 
-      // Verificar si el balón encestó
-      if (newTop >= 330) {
+    // Función para mover el balón aleatoriamente
+    function moveBall() {
+      let randomX = Math.random() * (court.offsetWidth - basketball.offsetWidth);
+      let randomY = Math.random() * (court.offsetHeight - basketball.offsetHeight);
+      
+      basketball.style.left = `${randomX}px`;
+      basketball.style.top = `${randomY}px`;
+    }
+
+    // Detección de clics en el balón
+    basketball.addEventListener("click", function () {
+      let ballRect = basketball.getBoundingClientRect();
+      let hoopRect = hoop.getBoundingClientRect();
+
+      // Verificar si el balón entra en el aro
+      if (
+        ballRect.left + ballRect.width / 2 > hoopRect.left &&
+        ballRect.left + ballRect.width / 2 < hoopRect.left + hoopRect.width &&
+        ballRect.top + ballRect.height > hoopRect.top &&
+        ballRect.top + ballRect.height < hoopRect.top + hoopRect.height
+      ) {
+        // Sumar puntos
         score += 1;
         scoreboard.textContent = `Puntos: ${score}`;
+        scoreSound.play(); // Sonido de puntuación
+      } else {
+        missSound.play(); // Sonido de fallo
+      }
+
+      // Mover el balón aleatoriamente
+      moveBall();
+    });
+
+    // Función para reiniciar el juego
+    function resetGame() {
+      score = 0;
+      scoreboard.textContent = `Puntos: 0`;
+      moveBall(); // Mover el balón a una posición aleatoria
+      resetButton.style.display = "none";
+    }
+
+    // Mostrar el botón de reiniciar
+    basketball.addEventListener("click", function () {
+      if (score > 0) {
+        resetButton.style.display = "block";
       }
     });
+
+    // Agregar acción de reiniciar
+    resetButton.addEventListener("click", resetGame);
+
+    // Inicialización
+    moveBall(); // Iniciar con una posición aleatoria del balón
   </script>
 </body>
 </html>
