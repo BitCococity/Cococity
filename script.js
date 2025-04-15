@@ -31,17 +31,16 @@ function resetBall() {
 }
 
 function drawHoop() {
-  // Tablero
   ctx.fillStyle = "#ccc";
-  ctx.fillRect(hoop.x - 10, hoop.y - 40, 80, 40);
-  // Aro
+  ctx.fillRect(hoop.x - 10, hoop.y - 40, 80, 40); // tablero
+
   ctx.fillStyle = "#e53935";
-  ctx.fillRect(hoop.x, hoop.y, hoop.width, hoop.height);
-  // Red (líneas)
-  ctx.strokeStyle = "white";
+  ctx.fillRect(hoop.x, hoop.y, hoop.width, hoop.height); // aro
+
+  ctx.strokeStyle = "#fff";
   ctx.beginPath();
   ctx.moveTo(hoop.x, hoop.y + hoop.height);
-  ctx.lineTo(hoop.x + hoop.width, hoop.y + hoop.height + 15);
+  ctx.lineTo(hoop.x + hoop.width, hoop.y + hoop.height + 10);
   ctx.stroke();
 }
 
@@ -55,37 +54,22 @@ function drawBall() {
   ctx.closePath();
 }
 
-function drawPalmTree() {
-  // Tronco
-  ctx.fillStyle = "#6d4c41";
-  ctx.fillRect(50, canvas.height - 150, 20, 150);
-
-  // Hojas
-  ctx.fillStyle = "#2e7d32";
-  for (let i = 0; i < 5; i++) {
-    ctx.beginPath();
-    ctx.ellipse(60, canvas.height - 150, 60, 15, Math.PI / 4 * i, 0, Math.PI * 2);
-    ctx.fill();
-  }
-}
-
 function update() {
   if (ball.inAir) {
-    ball.dy += 0.5;
+    ball.dy += 0.4; // gravedad
     ball.x += ball.dx;
     ball.y += ball.dy;
 
-    // Suelo
     if (ball.y + ball.radius > canvas.height) {
       resetBall();
     }
 
-    // Enceste
+    // encesta
     if (
-      ball.x > hoop.x &&
-      ball.x < hoop.x + hoop.width &&
+      ball.x > hoop.x + 10 &&
+      ball.x < hoop.x + hoop.width - 10 &&
       ball.y > hoop.y &&
-      ball.y < hoop.y + hoop.height + 10
+      ball.y < hoop.y + 10
     ) {
       score++;
       document.getElementById("score").textContent = score;
@@ -96,7 +80,6 @@ function update() {
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  drawPalmTree();
   drawHoop();
   drawBall();
 }
@@ -109,8 +92,8 @@ function gameLoop() {
 
 canvas.addEventListener("click", () => {
   if (!ball.inAir) {
-    const angle = Math.random() * 0.4 + 0.2;
-    const power = Math.random() * 6 + 12;
+    const angle = 0.3 + Math.random() * 0.2;
+    const power = 12 + Math.random() * 5;
     ball.dx = Math.cos(angle) * power;
     ball.dy = -Math.sin(angle) * power;
     ball.inAir = true;
