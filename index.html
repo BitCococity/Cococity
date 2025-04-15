@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cococity 🌴</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.worldcoin.org/idkit.js"></script>
   <style>
     .neon {
       color: #ff00ff;
@@ -24,123 +23,56 @@
   </style>
 </head>
 <body class="bg-black min-h-screen font-sans text-white">
-  <audio autoplay loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    Tu navegador no soporta audio HTML5.
-  </audio>
-
   <div class="max-w-2xl mx-auto p-6">
     <div class="text-center mb-8">
       <h1 class="text-4xl font-bold neon text-center">🌴 Welcome to Fabulous Cococity 🌴</h1>
       <p class="text-lg text-gray-300 mt-2">Una ciudad llena de locuras creativas, verificada por humanos reales.</p>
     </div>
 
+    <!-- Menú desplegable de artistas de Spotify -->
+    <div class="mb-6">
+      <label for="spotify-artists" class="block text-pink-400 font-semibold mb-2">🎵 Escucha a nuestros artistas:</label>
+      <select id="spotify-artists" class="w-full p-2 rounded bg-zinc-800 text-white" onchange="if(this.value) window.open(this.value, '_blank')">
+        <option value="">Selecciona un artista</option>
+        <option value="https://open.spotify.com/artist/48XM3ZGPuiGIiKrJXE0fW4">🎧 Artista 1</option>
+        <option value="https://open.spotify.com/artist/342ooXlx6MoHh8ZaNMEh8G">🎧 Artista 2</option>
+        <option value="https://open.spotify.com/artist/0jZT19Mu0cVe7t2FsyWsoV">🎧 Artista 3</option>
+        <option value="https://open.spotify.com/artist/51K7j7kbc5meJMVaUBNvK6">🎧 Artista 4</option>
+        <option value="https://open.spotify.com/artist/784mtdLlFMLdyqVxPYyT5B">🎧 Artista 5</option>
+      </select>
+    </div>
+
+    <!-- Botón destacado para Telegram -->
     <div class="text-center mb-6">
-      <a href="https://worldcoin.org/mini-app?app_id=app_15daccf5b7d4ec9b7dbba044a8fdeab5&app_mode=mini-app" target="_blank" class="inline-block bg-green-800 text-green-300 font-semibold py-2 px-4 rounded-lg border border-green-500 hover:scale-105 transition">
-        🪙 Consigue Bitcococoin en PUF
-      </a>
-      <p class="mt-2 text-sm text-gray-400">
-        <a href="https://dexscreener.com/worldchain/0x3E1695149A3a70b5C627a8623745fdb58be4d578" target="_blank" class="underline text-blue-400">Bitcococoin to the moon 🚀</a>
-      </p>
-    </div>
-
-    <div class="flex justify-center mb-6">
-      <div id="world-id-verification"></div>
-    </div>
-
-    <div class="grid grid-cols-2 gap-4 mb-8">
-      <button onclick="toggleMuseo()" class="bg-zinc-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-pink-600">
-        <h2 class="text-xl font-bold text-pink-400">🎨 Museo del Futuro</h2>
-        <p class="text-gray-400 text-sm">Sube tus creaciones con IA.</p>
-      </button>
-      <a href="#" class="bg-zinc-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-indigo-600">
-        <h2 class="text-xl font-bold text-indigo-400">🧠 Trivias Locas</h2>
-        <p class="text-gray-400 text-sm">Responde y desbloquea secretos.</p>
-      </a>
-      <a href="#" class="bg-zinc-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-orange-600">
-        <h2 class="text-xl font-bold text-orange-400">🎮 Minijuego Tonto</h2>
-        <p class="text-gray-400 text-sm">¡Aplasta cocos y gana puntos!</p>
-      </a>
-      <a href="https://open.spotify.com/playlist/3sGZj0lxj9bWMkOq35amDz?si=Slzlr3j6SJi0ZV321zSszQ" target="_blank" class="bg-green-800 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-green-500">
-        <h2 class="text-xl font-bold text-green-300">📻 Radio Cococity</h2>
-        <p class="text-gray-200 text-sm">Escucha la playlist oficial en Spotify.</p>
-      </a>
-      <a href="https://www.youtube.com/@CocoLococoin" target="_blank" class="bg-red-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-red-500">
-        <h2 class="text-xl font-bold text-red-300">📺 CococityTV</h2>
-        <p class="text-gray-200 text-sm">Mira los videos más locos en YouTube.</p>
-      </a>
-      <a href="#" class="bg-zinc-800 shadow-md rounded-2xl p-4 hover:scale-105 transition opacity-50 cursor-not-allowed border border-gray-700">
-        <h2 class="text-xl font-bold text-gray-500">🚪 Club Secreto</h2>
-        <p class="text-gray-500 text-sm">Próximamente para holders.</p>
+      <a href="https://t.me/cocolococoin" target="_blank" class="inline-flex items-center bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition">
+        <img src="https://imagepng.org/wp-content/uploads/2017/11/telegram-icone-icon-3.png" alt="Telegram" class="w-6 h-6 mr-2">
+        Únete a nuestro canal de Telegram
       </a>
     </div>
 
-    <div id="museo" class="mb-12 hidden">
-      <h2 class="text-2xl font-bold text-pink-400 mb-4">🎨 Museo del Futuro</h2>
-      <form id="formulario-museo" class="mb-6">
-        <input type="text" id="titulo" placeholder="Título de tu obra" class="w-full mb-2 p-2 rounded bg-zinc-800 text-white" required>
-        <input type="file" id="imagen" accept="image/*" class="w-full mb-4 p-2 rounded bg-zinc-800 text-white" required>
-        <button type="submit" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">Subir creación</button>
-      </form>
-      <div id="galeria" class="grid grid-cols-2 gap-4"></div>
-    </div>
-
-    <div class="mt-10 text-center space-y-4">
-      <p class="text-sm text-gray-500">ID de la app: <strong>bitcoinerssecondchance</strong></p>
-      <div class="flex justify-center gap-4 text-sm">
-        <a href="https://t.me/cocolococoin" target="_blank" class="flex items-center gap-1 text-blue-400 hover:text-blue-500">Telegram</a>
-        <a href="https://www.youtube.com/@CocoLococoin" target="_blank" class="flex items-center gap-1 text-red-400 hover:text-red-500">YouTube</a>
-        <a href="https://twitter.com/Btc_worldchain" target="_blank" class="flex items-center gap-1 text-white hover:text-gray-300">Twitter</a>
-      </div>
+    <!-- Enlaces a artistas de Spotify con íconos -->
+    <div class="grid grid-cols-1 gap-4 mb-8">
+      <a href="https://open.spotify.com/artist/48XM3ZGPuiGIiKrJXE0fW4" target="_blank" class="flex items-center bg-zinc-900 p-4 rounded-lg hover:bg-zinc-800 transition">
+        <img src="https://www.vecteezy.com/png/16716458-spotify-png-icon" alt="Spotify" class="w-6 h-6 mr-3">
+        Artista 1
+      </a>
+      <a href="https://open.spotify.com/artist/342ooXlx6MoHh8ZaNMEh8G" target="_blank" class="flex items-center bg-zinc-900 p-4 rounded-lg hover:bg-zinc-800 transition">
+        <img src="https://www.vecteezy.com/png/16716458-spotify-png-icon" alt="Spotify" class="w-6 h-6 mr-3">
+        Artista 2
+      </a>
+      <a href="https://open.spotify.com/artist/0jZT19Mu0cVe7t2FsyWsoV" target="_blank" class="flex items-center bg-zinc-900 p-4 rounded-lg hover:bg-zinc-800 transition">
+        <img src="https://www.vecteezy.com/png/16716458-spotify-png-icon" alt="Spotify" class="w-6 h-6 mr-3">
+        Artista 3
+      </a>
+      <a href="https://open.spotify.com/artist/51K7j7kbc5meJMVaUBNvK6" target="_blank" class="flex items-center bg-zinc-900 p-4 rounded-lg hover:bg-zinc-800 transition">
+        <img src="https://www.vecteezy.com/png/16716458-spotify-png-icon" alt="Spotify" class="w-6 h-6 mr-3">
+        Artista 4
+      </a>
+      <a href="https://open.spotify.com/artist/784mtdLlFMLdyqVxPYyT5B" target="_blank" class="flex items-center bg-zinc-900 p-4 rounded-lg hover:bg-zinc-800 transition">
+        <img src="https://www.vecteezy.com/png/16716458-spotify-png-icon" alt="Spotify" class="w-6 h-6 mr-3">
+        Artista 5
+      </a>
     </div>
   </div>
-
-  <script>
-    function toggleMuseo() {
-      const museo = document.getElementById("museo");
-      museo.classList.toggle("hidden");
-    }
-
-    window.addEventListener("DOMContentLoaded", function () {
-      window.IDKit.init({
-        app_id: "bitcoinerssecondchance",
-        action: "login",
-        signal: "cococity-access",
-        onSuccess: (proof) => {
-          alert("Verificación completada. ¡Bienvenido a Cococity!");
-        },
-        onError: (error) => {
-          console.error(error);
-          alert("Error de verificación");
-        },
-      });
-
-      const form = document.getElementById("formulario-museo");
-      const galeria = document.getElementById("galeria");
-
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const titulo = document.getElementById("titulo").value;
-        const archivo = document.getElementById("imagen").files[0];
-
-        if (archivo && archivo.type.startsWith("image/")) {
-          const lector = new FileReader();
-          lector.onload = function (evento) {
-            const div = document.createElement("div");
-            div.classList.add("bg-zinc-900", "p-2", "rounded", "shadow");
-            div.innerHTML = `
-              <img src="${evento.target.result}" alt="${titulo}" class="w-full h-48 object-cover rounded mb-2">
-              <p class="text-sm text-center text-pink-400 font-semibold">${titulo}</p>
-            `;
-            galeria.prepend(div);
-            form.reset();
-          };
-          lector.readAsDataURL(archivo);
-        } else {
-          alert("Por favor, sube una imagen válida.");
-        }
-      });
-    });
-  </script>
 </body>
 </html>
