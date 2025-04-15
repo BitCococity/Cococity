@@ -31,7 +31,6 @@
 <body class="bg-black min-h-screen font-sans text-white">
   <div class="max-w-2xl mx-auto p-6">
     <div class="text-center mb-8">
-      <!-- Titulo con luces neon parpadeando -->
       <h1 class="text-4xl font-bold neon-heading">🌴 Welcome to Fabulous Cococity 🌴</h1>
       <p class="text-lg text-gray-300 mt-2">¡Bienvenido a Cococity! Un paraíso digital lleno de música, juegos y mucho más.</p>
     </div>
@@ -61,22 +60,9 @@
       </select>
     </div>
 
-    <!-- Otras secciones -->
-    <div class="grid grid-cols-2 gap-4 mb-8">
-      <button onclick="toggleMuseo()" class="bg-zinc-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-pink-600">
-        <h2 class="text-xl font-bold text-pink-400">🎨 Museo del Futuro</h2>
-        <p class="text-gray-400 text-sm">Sube tus creaciones con IA.</p>
-      </button>
-      <a href="#" class="bg-zinc-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-indigo-600">
-        <h2 class="text-xl font-bold text-indigo-400">🧠 Trivias Locas</h2>
-        <p class="text-gray-400 text-sm">Responde y desbloquea secretos.</p>
-      </a>
-    </div>
-
     <!-- Botones de redes sociales con iconos -->
     <div class="mt-8 text-center space-y-4">
       <p class="text-lg text-blue-400 font-bold">
-        <!-- Telegram Button -->
         <a href="https://t.me/cocolococoin" target="_blank" class="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg">
           <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" class="w-6 h-6" alt="Telegram" />
           ¡Únete a nuestro canal de Telegram!
@@ -84,12 +70,10 @@
       </p>
 
       <div class="flex justify-center gap-6 text-sm">
-        <!-- YouTube -->
         <a href="https://www.youtube.com/@CocoLococoin" target="_blank" class="flex items-center gap-2 text-red-400 hover:text-red-500">
           <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" class="w-6 h-6" alt="YouTube" />
           YouTube
         </a>
-        <!-- Twitter (X) -->
         <a href="https://twitter.com/Btc_worldchain" target="_blank" class="flex items-center gap-2 text-blue-400 hover:text-blue-500">
           <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" class="w-6 h-6" alt="Twitter" />
           Twitter
@@ -105,12 +89,5 @@
       </a>
     </div>
   </div>
-
-  <script>
-    function toggleMuseo() {
-      const museo = document.getElementById("museo");
-      museo.classList.toggle("hidden");
-    }
-  </script>
 </body>
 </html>
