@@ -17,14 +17,27 @@
     }
     .neon-heading {
       color: #ff00ff;
-      text-shadow:
-        0 0 5px #ff00ff,
-        0 0 10px #ff00ff;
+      text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;
       animation: blink 1.5s infinite alternate;
     }
     @keyframes blink {
       from { opacity: 1; }
       to { opacity: 0.6; }
+    }
+    .cell {
+      width: 100px;
+      height: 100px;
+      background-color: #111;
+      border: 2px solid #ff00ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .cell:hover {
+      background-color: #222;
     }
   </style>
 </head>
@@ -36,15 +49,7 @@
       <p class="text-lg text-gray-300 mt-2">¡Música, juegos y comunidad en un solo lugar!</p>
     </div>
 
-    <!-- Juego de tres en raya -->
-    <div class="grid grid-cols-1 gap-4 mb-8">
-      <a href="tres-en-raya.html" class="bg-zinc-900 rounded-2xl p-4 hover:scale-105 transition border border-orange-600 text-center">
-        <h2 class="text-xl font-bold text-orange-400">❌⭕ Tres en Raya</h2>
-        <p class="text-gray-400 text-sm">Juega contra el sistema en este clásico digital.</p>
-      </a>
-    </div>
-
-    <!-- Radio Cococity (desplegable) -->
+    <!-- Radio Cococity -->
     <div class="bg-zinc-900 rounded-2xl p-4 mb-8 border border-green-600">
       <h2 class="text-xl font-bold text-green-400 mb-4">📻 Radio Cococity</h2>
       <select onchange="if(this.value) window.open(this.value, '_blank')" class="w-full bg-zinc-800 text-white p-3 rounded">
@@ -57,7 +62,17 @@
       </select>
     </div>
 
-    <!-- Botón Telegram -->
+    <!-- Juego Tres en Raya -->
+    <div class="bg-zinc-900 rounded-2xl p-4 mb-8 border border-orange-600 text-center">
+      <h2 class="text-xl font-bold text-orange-400 mb-4">❌⭕ Tres en Raya</h2>
+      <div class="grid grid-cols-3 gap-2 justify-center mb-4" id="board"></div>
+      <p class="text-gray-300 mb-2 text-lg" id="status">Turno: ❌</p>
+      <button onclick="resetGame()" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
+        Reiniciar Juego
+      </button>
+    </div>
+
+    <!-- Telegram -->
     <div class="text-center mt-10 mb-6">
       <a href="https://t.me/cocolococoin" target="_blank"
          class="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
@@ -66,7 +81,7 @@
       </a>
     </div>
 
-    <!-- Enlaces YouTube y Twitter -->
+    <!-- Enlaces redes -->
     <div class="flex justify-center gap-6 text-sm mb-10">
       <a href="https://www.youtube.com/@CocoLococoin" target="_blank" class="flex items-center gap-2 text-red-400 hover:text-red-500">
         <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" class="w-6 h-6" alt="YouTube" />
@@ -78,7 +93,7 @@
       </a>
     </div>
 
-    <!-- Comprar Bitcococoin (PUF) -->
+    <!-- Comprar Bitcococoin -->
     <div class="text-center mb-8">
       <a href="https://worldcoin.org/mini-app?app_id=app_15daccf5b7d4ec9b7dbba044a8fdeab5&app_mode=mini-app" target="_blank"
          class="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg text-lg font-semibold">
@@ -92,5 +107,65 @@
       <p class="text-sm text-gray-500 mt-1">Powered by Bitcococoin</p>
     </div>
   </div>
+
+  <!-- Juego JS -->
+  <script>
+    const board = document.getElementById('board');
+    const statusText = document.getElementById('status');
+    let currentPlayer = '❌';
+    let gameActive = true;
+    let cells = ['', '', '', '', '', '', '', '', ''];
+
+    function renderBoard() {
+      board.innerHTML = '';
+      cells.forEach((cell, index) => {
+        const div = document.createElement('div');
+        div.classList.add('cell');
+        div.textContent = cell;
+        div.addEventListener('click', () => handleClick(index));
+        board.appendChild(div);
+      });
+    }
+
+    function handleClick(index) {
+      if (!gameActive || cells[index] !== '') return;
+      cells[index] = currentPlayer;
+      renderBoard();
+      if (checkWin()) {
+        statusText.textContent = `Ganó ${currentPlayer}!`;
+        gameActive = false;
+        return;
+      }
+      if (cells.every(cell => cell !== '')) {
+        statusText.textContent = 'Empate';
+        gameActive = false;
+        return;
+      }
+      currentPlayer = currentPlayer === '❌' ? '⭕' : '❌';
+      statusText.textContent = `Turno: ${currentPlayer}`;
+    }
+
+    function checkWin() {
+      const wins = [
+        [0,1,2],[3,4,5],[6,7,8],
+        [0,3,6],[1,4,7],[2,5,8],
+        [0,4,8],[2,4,6]
+      ];
+      return wins.some(combo => {
+        const [a,b,c] = combo;
+        return cells[a] && cells[a] === cells[b] && cells[a] === cells[c];
+      });
+    }
+
+    function resetGame() {
+      cells = ['', '', '', '', '', '', '', '', ''];
+      currentPlayer = '❌';
+      gameActive = true;
+      statusText.textContent = `Turno: ${currentPlayer}`;
+      renderBoard();
+    }
+
+    renderBoard();
+  </script>
 </body>
 </html>
