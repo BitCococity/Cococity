@@ -62,11 +62,18 @@
       </select>
     </div>
 
-    <!-- Juego Tres en Raya -->
-    <div class="bg-zinc-900 rounded-2xl p-4 mb-8 border border-orange-600 text-center">
-      <h2 class="text-xl font-bold text-orange-400 mb-4">❌⭕ Tres en Raya</h2>
+    <!-- Botón para mostrar juego -->
+    <div class="text-center mb-6">
+      <button onclick="toggleGame()" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
+        Jugar Tres en Raya
+      </button>
+    </div>
+
+    <!-- Juego oculto hasta que se despliegue -->
+    <div id="gameContainer" class="bg-zinc-900 rounded-2xl p-4 mb-8 border border-orange-600 text-center hidden">
+      <h2 class="text-xl font-bold text-orange-400 mb-4">❌⭕ Tres en Raya vs IA</h2>
       <div class="grid grid-cols-3 gap-2 justify-center mb-4" id="board"></div>
-      <p class="text-gray-300 mb-2 text-lg" id="status">Turno: ❌</p>
+      <p class="text-gray-300 mb-2 text-lg" id="status">Tu turno: ❌</p>
       <button onclick="resetGame()" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
         Reiniciar Juego
       </button>
@@ -108,13 +115,15 @@
     </div>
   </div>
 
-  <!-- Juego JS -->
+  <!-- Juego vs PC -->
   <script>
     const board = document.getElementById('board');
     const statusText = document.getElementById('status');
+    const gameContainer = document.getElementById('gameContainer');
+
+    let cells = Array(9).fill('');
     let currentPlayer = '❌';
     let gameActive = true;
-    let cells = ['', '', '', '', '', '', '', '', ''];
 
     function renderBoard() {
       board.innerHTML = '';
@@ -128,41 +137,60 @@
     }
 
     function handleClick(index) {
-      if (!gameActive || cells[index] !== '') return;
-      cells[index] = currentPlayer;
+      if (!gameActive || cells[index] !== '' || currentPlayer !== '❌') return;
+
+      cells[index] = '❌';
       renderBoard();
-      if (checkWin()) {
-        statusText.textContent = `Ganó ${currentPlayer}!`;
-        gameActive = false;
-        return;
-      }
-      if (cells.every(cell => cell !== '')) {
-        statusText.textContent = 'Empate';
-        gameActive = false;
-        return;
-      }
-      currentPlayer = currentPlayer === '❌' ? '⭕' : '❌';
-      statusText.textContent = `Turno: ${currentPlayer}`;
+      if (checkWin('❌')) return endGame('Ganaste!');
+      if (isDraw()) return endGame('Empate');
+      currentPlayer = '⭕';
+      statusText.textContent = 'Turno de la IA...';
+      setTimeout(aiMove, 500);
     }
 
-    function checkWin() {
+    function aiMove() {
+      if (!gameActive) return;
+      const empty = cells.map((val, i) => val === '' ? i : null).filter(i => i !== null);
+      const move = empty[Math.floor(Math.random() * empty.length)];
+      cells[move] = '⭕';
+      renderBoard();
+      if (checkWin('⭕')) return endGame('La IA gana');
+      if (isDraw()) return endGame('Empate');
+      currentPlayer = '❌';
+      statusText.textContent = 'Tu turno: ❌';
+    }
+
+    function checkWin(player) {
       const wins = [
         [0,1,2],[3,4,5],[6,7,8],
         [0,3,6],[1,4,7],[2,5,8],
         [0,4,8],[2,4,6]
       ];
       return wins.some(combo => {
-        const [a,b,c] = combo;
-        return cells[a] && cells[a] === cells[b] && cells[a] === cells[c];
+        if (combo.every(i => cells[i] === player)) {
+          statusText.textContent = `${player} gana!`;
+          gameActive = false;
+          return true;
+        }
+        return false;
       });
     }
 
+    function isDraw() {
+      return cells.every(c => c !== '');
+    }
+
     function resetGame() {
-      cells = ['', '', '', '', '', '', '', '', ''];
+      cells = Array(9).fill('');
       currentPlayer = '❌';
       gameActive = true;
-      statusText.textContent = `Turno: ${currentPlayer}`;
+      statusText.textContent = 'Tu turno: ❌';
       renderBoard();
+    }
+
+    function toggleGame() {
+      gameContainer.classList.toggle('hidden');
+      if (!gameContainer.classList.contains('hidden')) resetGame();
     }
 
     renderBoard();
