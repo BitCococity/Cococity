@@ -6,68 +6,81 @@
   <title>Cococity 🌴</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: white;
+      font-family: sans-serif;
+      overflow-x: hidden;
+      overscroll-behavior: none;
+    }
+
     .neon-heading {
       color: #ff00ff;
-      text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;
+      text-shadow:
+        0 0 5px #ff00ff,
+        0 0 10px #ff00ff;
       animation: blink 1.5s infinite alternate;
     }
+
     @keyframes blink {
       from { opacity: 1; }
       to { opacity: 0.6; }
     }
   </style>
 </head>
-<body class="bg-black min-h-screen font-sans text-white">
+<body>
   <div class="max-w-2xl mx-auto p-6">
+    <!-- Título -->
     <div class="text-center mb-8">
       <h1 class="text-4xl font-bold neon-heading">🌴 Welcome to Fabulous Cococity 🌴</h1>
-      <p class="text-lg text-gray-300 mt-2">¡Bienvenido a Cococity! Un paraíso digital lleno de música, juegos y mucho más.</p>
+      <p class="text-lg text-gray-300 mt-2">¡Bienvenido a Cococity! Música, juegos y mucho más.</p>
     </div>
 
-    <!-- Sección de Enlaces -->
+    <!-- Juego de tres en raya -->
     <div class="grid grid-cols-1 gap-4 mb-8">
-      <a href="tresenraya.html" class="bg-zinc-900 shadow-md rounded-2xl p-4 hover:scale-105 transition border border-pink-600">
-        <h2 class="text-xl font-bold text-pink-400">❌⭕ Tres en Raya</h2>
-        <p class="text-gray-400 text-sm">Juega contra el ordenador en este clásico Cococity.</p>
+      <a href="tres-en-raya.html" class="bg-zinc-900 rounded-2xl p-4 hover:scale-105 transition border border-orange-600 text-center">
+        <h2 class="text-xl font-bold text-orange-400">❌⭕ Tres en Raya</h2>
+        <p class="text-gray-400 text-sm">Juega contra el sistema en este clásico digital.</p>
       </a>
     </div>
 
     <!-- Radio Cococity -->
-    <div class="bg-zinc-900 shadow-md rounded-2xl p-4 mb-8 hover:scale-105 transition border border-green-600">
-      <h2 class="text-xl font-bold text-green-400 mb-2">📻 Radio Cococity</h2>
-      <select id="spotify-artists" class="w-full p-2 rounded bg-zinc-800 text-white" onchange="if(this.value) window.open(this.value, '_blank')">
-        <option value="">Elige un artista</option>
-        <option value="https://open.spotify.com/artist/48XM3ZGPuiGIiKrJXE0fW4">Mia Ivanova</option>
-        <option value="https://open.spotify.com/artist/342ooXlx6MoHh8ZaNMEh8G">Keko</option>
-        <option value="https://open.spotify.com/artist/0jZT19Mu0cVe7t2FsyWsoV">KDK7</option>
-        <option value="https://open.spotify.com/artist/51K7j7kbc5meJMVaUBNvK6">Tianyu</option>
-        <option value="https://open.spotify.com/artist/784mtdLlFMLdyqVxPYyT5B">Radio 77</option>
-      </select>
-    </div>
-
-    <!-- Botones de redes sociales con iconos -->
-    <div class="mt-8 text-center space-y-4">
-      <p class="text-lg text-blue-400 font-bold">
-        <a href="https://t.me/cocolococoin" target="_blank" class="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" class="w-6 h-6" alt="Telegram" />
-          ¡Únete a nuestro canal de Telegram!
-        </a>
-      </p>
-
-      <div class="flex justify-center gap-6 text-sm">
-        <a href="https://www.youtube.com/@CocoLococoin" target="_blank" class="flex items-center gap-2 text-red-400 hover:text-red-500">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" class="w-6 h-6" alt="YouTube" />
-          YouTube
-        </a>
-        <a href="https://twitter.com/Btc_worldchain" target="_blank" class="flex items-center gap-2 text-blue-400 hover:text-blue-500">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" class="w-6 h-6" alt="Twitter" />
-          Twitter
-        </a>
+    <div class="bg-zinc-900 rounded-2xl p-4 mb-8 border border-green-600">
+      <h2 class="text-xl font-bold text-green-400 mb-4">📻 Radio Cococity</h2>
+      <div class="grid grid-cols-1 gap-3">
+        <a href="https://open.spotify.com/artist/48XM3ZGPuiGIiKrJXE0fW4" target="_blank" class="block bg-green-700 hover:bg-green-600 text-white text-center rounded p-2">Mia Ivanova</a>
+        <a href="https://open.spotify.com/artist/342ooXlx6MoHh8ZaNMEh8G" target="_blank" class="block bg-green-700 hover:bg-green-600 text-white text-center rounded p-2">Keko</a>
+        <a href="https://open.spotify.com/artist/0jZT19Mu0cVe7t2FsyWsoV" target="_blank" class="block bg-green-700 hover:bg-green-600 text-white text-center rounded p-2">KDK7</a>
+        <a href="https://open.spotify.com/artist/51K7j7kbc5meJMVaUBNvK6" target="_blank" class="block bg-green-700 hover:bg-green-600 text-white text-center rounded p-2">Tianyu</a>
+        <a href="https://open.spotify.com/artist/784mtdLlFMLdyqVxPYyT5B" target="_blank" class="block bg-green-700 hover:bg-green-600 text-white text-center rounded p-2">Radio 77</a>
       </div>
     </div>
 
-    <!-- Sello Bitcococoin -->
-    <div class="mt-8 text-center">
+    <!-- Botón de Telegram -->
+    <div class="text-center mt-10 mb-6">
+      <a href="https://t.me/cocolococoin" target="_blank"
+         class="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" class="w-6 h-6" alt="Telegram" />
+        Únete a nuestro canal de Telegram
+      </a>
+    </div>
+
+    <!-- Enlaces YouTube y Twitter -->
+    <div class="flex justify-center gap-6 text-sm mb-10">
+      <a href="https://www.youtube.com/@CocoLococoin" target="_blank" class="flex items-center gap-2 text-red-400 hover:text-red-500">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" class="w-6 h-6" alt="YouTube" />
+        YouTube
+      </a>
+      <a href="https://twitter.com/Btc_worldchain" target="_blank" class="flex items-center gap-2 text-blue-400 hover:text-blue-500">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" class="w-6 h-6" alt="Twitter" />
+        Twitter
+      </a>
+    </div>
+
+    <!-- Logo Bitcococoin -->
+    <div class="mt-4 text-center">
       <a href="https://worldcoin.org/mini-app?app_id=app_15daccf5b7d4ec9b7dbba044a8fdeab5&app_mode=mini-app" target="_blank">
         <img src="/bitcococoin-logo.png" alt="Bitcococoin" class="mx-auto w-28 hover:scale-105 transition duration-300" />
         <p class="text-sm text-gray-500 mt-1">Powered by Bitcococoin</p>
