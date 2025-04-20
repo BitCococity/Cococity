@@ -4,196 +4,125 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cococity 🌴</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <style>
-    html, body {
+    body {
       margin: 0;
-      padding: 0;
-      background-color: #000;
-      color: white;
-      font-family: sans-serif;
-      overflow-x: hidden;
-      overscroll-behavior: none;
-    }
-    .neon-heading {
-      color: #ff00ff;
-      text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;
-      animation: blink 1.5s infinite alternate;
-    }
-    @keyframes blink {
-      from { opacity: 1; }
-      to { opacity: 0.6; }
-    }
-    .cell {
-      width: 100px;
-      height: 100px;
-      background-color: #111;
-      border: 2px solid #ff00ff;
+      font-family: 'Arial Rounded MT Bold', sans-serif;
+      background: linear-gradient(to bottom, #fdfcfb, #e2d1c3);
+      color: #333;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      font-size: 2.5rem;
-      cursor: pointer;
-      transition: background-color 0.2s;
+      padding: 20px;
     }
-    .cell:hover {
-      background-color: #222;
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    h1 {
+      font-size: 2.2rem;
+      color: #ff69b4;
+    }
+    .card {
+      background: #ffffffcc;
+      border-radius: 20px;
+      padding: 20px;
+      margin: 15px 0;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .card button, .card a {
+      background: #00cba9;
+      color: white;
+      padding: 10px 20px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+    }
+    .card button:hover, .card a:hover {
+      background: #009e84;
+    }
+    .spotify-list {
+      display: none;
+      margin-top: 10px;
+    }
+    .social-icons {
+      margin-top: 40px;
+    }
+    .social-icons a {
+      margin: 0 10px;
+      color: #555;
+      font-size: 1.5rem;
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 0.9rem;
+      color: #aaa;
     }
   </style>
+  <script src="https://unpkg.com/@worldcoin/idkit@0.4.1"></script>
 </head>
 <body>
-  <div class="max-w-2xl mx-auto p-6">
-    <!-- Título -->
-    <div class="text-center mb-8">
-      <h1 class="text-4xl font-bold neon-heading">🌴 Welcome to Fabulous Cococity 🌴</h1>
-      <p class="text-lg text-gray-300 mt-2">¡Música, juegos y comunidad en un solo lugar!</p>
-    </div>
+  <header>
+    <h1>Bienvenido a Cococity 🌴</h1>
+    <div id="idkit-container"></div>
+  </header>
 
-    <!-- Radio Cococity -->
-    <div class="bg-zinc-900 rounded-2xl p-4 mb-8 border border-green-600">
-      <h2 class="text-xl font-bold text-green-400 mb-4">📻 Radio Cococity</h2>
-      <select onchange="if(this.value) window.open(this.value, '_blank')" class="w-full bg-zinc-800 text-white p-3 rounded">
-        <option value="">Elige un artista de Spotify</option>
-        <option value="https://open.spotify.com/artist/48XM3ZGPuiGIiKrJXE0fW4">Mia Ivanova</option>
-        <option value="https://open.spotify.com/artist/342ooXlx6MoHh8ZaNMEh8G">Keko</option>
-        <option value="https://open.spotify.com/artist/0jZT19Mu0cVe7t2FsyWsoV">KDK7</option>
-        <option value="https://open.spotify.com/artist/51K7j7kbc5meJMVaUBNvK6">Tianyu</option>
-        <option value="https://open.spotify.com/artist/784mtdLlFMLdyqVxPYyT5B">Radio 77</option>
-      </select>
-    </div>
+  <div class="card">
+    <h2>💰 Consigue un Bitcococoin</h2>
+    <a href="https://worldcoin.org/mini-app?app_id=app_15daccf5b7d4ec9b7dbba044a8fdeab5&app_mode=mini-app" target="_blank">Ir a la app de PUF</a>
+    <p id="wallet-address"></p>
+  </div>
 
-    <!-- Botón para mostrar juego -->
-    <div class="text-center mb-6">
-      <button onclick="toggleGame()" class="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
-        Jugar Tres en Raya
-      </button>
-    </div>
-
-    <!-- Juego oculto hasta que se despliegue -->
-    <div id="gameContainer" class="bg-zinc-900 rounded-2xl p-4 mb-8 border border-orange-600 text-center hidden">
-      <h2 class="text-xl font-bold text-orange-400 mb-4">❌⭕ Tres en Raya vs IA</h2>
-      <div class="grid grid-cols-3 gap-2 justify-center mb-4" id="board"></div>
-      <p class="text-gray-300 mb-2 text-lg" id="status">Tu turno: ❌</p>
-      <button onclick="resetGame()" class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded">
-        Reiniciar Juego
-      </button>
-    </div>
-
-    <!-- Telegram -->
-    <div class="text-center mt-10 mb-6">
-      <a href="https://t.me/cocolococoin" target="_blank"
-         class="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-6 rounded-lg text-lg">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" class="w-6 h-6" alt="Telegram" />
-        Únete a nuestro canal de Telegram
-      </a>
-    </div>
-
-    <!-- Enlaces redes -->
-    <div class="flex justify-center gap-6 text-sm mb-10">
-      <a href="https://www.youtube.com/@CocoLococoin" target="_blank" class="flex items-center gap-2 text-red-400 hover:text-red-500">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" class="w-6 h-6" alt="YouTube" />
-        YouTube
-      </a>
-      <a href="https://twitter.com/Btc_worldchain" target="_blank" class="flex items-center gap-2 text-blue-400 hover:text-blue-500">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" class="w-6 h-6" alt="Twitter" />
-        Twitter
-      </a>
-    </div>
-
-    <!-- Comprar Bitcococoin -->
-    <div class="text-center mb-8">
-      <a href="https://worldcoin.org/mini-app?app_id=app_15daccf5b7d4ec9b7dbba044a8fdeab5&app_mode=mini-app" target="_blank"
-         class="inline-block bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg text-lg font-semibold">
-        Consigue Bitcococoin en PUF
-      </a>
-    </div>
-
-    <!-- Logo Bitcococoin -->
-    <div class="mt-4 text-center">
-      <img src="/bitcococoin-logo.png" alt="Bitcococoin" class="mx-auto w-28 hover:scale-105 transition duration-300" />
-      <p class="text-sm text-gray-500 mt-1">Powered by Bitcococoin</p>
+  <div class="card">
+    <h2>🎧 Radio Cococity</h2>
+    <button onclick="toggleSpotifyList()">Ver artistas</button>
+    <div class="spotify-list" id="spotify-list">
+      <a href="https://open.spotify.com/artist/1" target="_blank">🎵 Mia Ivanova</a><br />
+      <a href="https://open.spotify.com/artist/2" target="_blank">🎵 Keko</a><br />
+      <a href="https://open.spotify.com/artist/3" target="_blank">🎵 KDK7</a><br />
+      <a href="https://open.spotify.com/artist/4" target="_blank">🎵 Tianyu</a><br />
+      <a href="https://open.spotify.com/artist/5" target="_blank">🎵 Radio 77</a>
     </div>
   </div>
 
-  <!-- Juego vs PC -->
+  <div class="card">
+    <h2>📺 CococityTV</h2>
+    <a href="https://www.youtube.com/@cococity" target="_blank">Ir al canal</a>
+  </div>
+
+  <div class="card">
+    <h2>📢 Únete a nuestro canal de Telegram</h2>
+    <a href="https://t.me/bitcoinsecondchance" target="_blank">Entrar al canal</a>
+  </div>
+
+  <div class="card">
+    <h2>🎮 Juego de 3 en raya</h2>
+    <!-- Aquí se puede insertar el juego directamente -->
+    <iframe src="/juego-tres-en-raya.html" style="width:100%;height:300px;border:none;border-radius:10px;"></iframe>
+  </div>
+
+  <div class="social-icons">
+    <a href="https://t.me/bitcoinsecondchance" target="_blank"><i class="fab fa-telegram"></i></a>
+    <a href="https://www.youtube.com/@cococity" target="_blank"><i class="fab fa-youtube"></i></a>
+    <a href="https://open.spotify.com/user/spotify" target="_blank"><i class="fab fa-spotify"></i></a>
+  </div>
+
+  <footer>
+    © Cococity 2025 🌴 Todos los derechos reservados.
+  </footer>
+
   <script>
-    const board = document.getElementById('board');
-    const statusText = document.getElementById('status');
-    const gameContainer = document.getElementById('gameContainer');
-
-    let cells = Array(9).fill('');
-    let currentPlayer = '❌';
-    let gameActive = true;
-
-    function renderBoard() {
-      board.innerHTML = '';
-      cells.forEach((cell, index) => {
-        const div = document.createElement('div');
-        div.classList.add('cell');
-        div.textContent = cell;
-        div.addEventListener('click', () => handleClick(index));
-        board.appendChild(div);
-      });
+    function toggleSpotifyList() {
+      const list = document.getElementById('spotify-list');
+      list.style.display = list.style.display === 'none' ? 'block' : 'none';
     }
-
-    function handleClick(index) {
-      if (!gameActive || cells[index] !== '' || currentPlayer !== '❌') return;
-
-      cells[index] = '❌';
-      renderBoard();
-      if (checkWin('❌')) return endGame('Ganaste!');
-      if (isDraw()) return endGame('Empate');
-      currentPlayer = '⭕';
-      statusText.textContent = 'Turno de la IA...';
-      setTimeout(aiMove, 500);
-    }
-
-    function aiMove() {
-      if (!gameActive) return;
-      const empty = cells.map((val, i) => val === '' ? i : null).filter(i => i !== null);
-      const move = empty[Math.floor(Math.random() * empty.length)];
-      cells[move] = '⭕';
-      renderBoard();
-      if (checkWin('⭕')) return endGame('La IA gana');
-      if (isDraw()) return endGame('Empate');
-      currentPlayer = '❌';
-      statusText.textContent = 'Tu turno: ❌';
-    }
-
-    function checkWin(player) {
-      const wins = [
-        [0,1,2],[3,4,5],[6,7,8],
-        [0,3,6],[1,4,7],[2,5,8],
-        [0,4,8],[2,4,6]
-      ];
-      return wins.some(combo => {
-        if (combo.every(i => cells[i] === player)) {
-          statusText.textContent = `${player} gana!`;
-          gameActive = false;
-          return true;
-        }
-        return false;
-      });
-    }
-
-    function isDraw() {
-      return cells.every(c => c !== '');
-    }
-
-    function resetGame() {
-      cells = Array(9).fill('');
-      currentPlayer = '❌';
-      gameActive = true;
-      statusText.textContent = 'Tu turno: ❌';
-      renderBoard();
-    }
-
-    function toggleGame() {
-      gameContainer.classList.toggle('hidden');
-      if (!gameContainer.classList.contains('hidden')) resetGame();
-    }
-
-    renderBoard();
   </script>
 </body>
 </html>
